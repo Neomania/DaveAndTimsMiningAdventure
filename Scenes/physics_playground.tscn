@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhghw165a1wm1"]
 
-[ext_resource type="Texture2D" uid="uid://ty1wt7fgwf0t" path="res://icon.svg" id="1_jtk63"]
+[ext_resource type="Texture2D" uid="uid://ty1wt7fgwf0t" path="res://icon.svg" id="1_y026q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0umk"]
 size = Vector2(128, 128)
@@ -17,7 +17,7 @@ position = Vector2(114, 89)
 shape = SubResource("RectangleShape2D_v0umk")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-texture = ExtResource("1_jtk63")
+texture = ExtResource("1_y026q")
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="StaticBody2D"]
 node_a = NodePath("..")
@@ -35,4 +35,4 @@ scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_fex8h")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D"]
-texture = ExtResource("1_jtk63")
+texture = ExtResource("1_y026q")
