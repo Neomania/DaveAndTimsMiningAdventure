@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo6c1qu13y47l"]
+
+[ext_resource type="Script" path="res://Scripts/Tiles.gd" id="1_yk2ll"]
+[ext_resource type="PackedScene" uid="uid://bwpcewr2ql71w" path="res://Scenes/Prefabs/Tile1.tscn" id="2_0wlxv"]
+
+[node name="Tiles" type="Node2D"]
+script = ExtResource("1_yk2ll")
+tile_prefab = ExtResource("2_0wlxv")

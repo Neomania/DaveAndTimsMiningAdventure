@@ -1,18 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://cls2jue6l4nyb"]
 
 [ext_resource type="Texture2D" uid="uid://ty1wt7fgwf0t" path="res://icon.svg" id="1_ll5ji"]
-[ext_resource type="PackedScene" uid="uid://cbb3icg5wqc2v" path="res://Scenes/tile_set.tscn" id="2_lcqaq"]
+[ext_resource type="PackedScene" uid="uid://bo6c1qu13y47l" path="res://Scenes/tiles.tscn" id="2_r45ec"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
-[node name="Node2D" parent="." instance=ExtResource("2_lcqaq")]
-position = Vector2(451, 220)
-
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(1037, 277)
+position = Vector2(333, 241)
 rotation = 0.750492
 scale = Vector2(0.419843, 0.444736)
 texture = ExtResource("1_ll5ji")
+
+[node name="Tiles" parent="." instance=ExtResource("2_r45ec")]
+position = Vector2(539, 266)
