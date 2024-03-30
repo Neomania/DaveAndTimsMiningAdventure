@@ -1,18 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cls2jue6l4nyb"]
+[gd_scene load_steps=4 format=3 uid="uid://cls2jue6l4nyb"]
 
-[ext_resource type="Texture2D" uid="uid://ty1wt7fgwf0t" path="res://icon.svg" id="1_ll5ji"]
+[ext_resource type="Script" path="res://Scripts/ShovelTool.gd" id="2_i01cl"]
 [ext_resource type="PackedScene" uid="uid://bo6c1qu13y47l" path="res://Scenes/tiles.tscn" id="2_r45ec"]
+[ext_resource type="PackedScene" uid="uid://dkgadhsngwghx" path="res://Scenes/Prefabs/ShovelUse.tscn" id="3_to4qm"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(333, 241)
-rotation = 0.750492
-scale = Vector2(0.419843, 0.444736)
-texture = ExtResource("1_ll5ji")
 
 [node name="Tiles" parent="." instance=ExtResource("2_r45ec")]
-position = Vector2(539, 266)
+position = Vector2(-864, -155)
+
+[node name="ShovelTool" type="Node2D" parent="."]
+script = ExtResource("2_i01cl")
+shovel_use = ExtResource("3_to4qm")
