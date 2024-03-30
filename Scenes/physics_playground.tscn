@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhghw165a1wm1"]
+[gd_scene load_steps=9 format=3 uid="uid://dhghw165a1wm1"]
 
+[ext_resource type="Script" path="res://Scripts/PhysicsPlayground/craneStatic.gd" id="1_qa45u"]
 [ext_resource type="Texture2D" uid="uid://ty1wt7fgwf0t" path="res://icon.svg" id="1_y026q"]
+[ext_resource type="Script" path="res://Scripts/PhysicsPlayground/rope.gd" id="2_v80pq"]
+[ext_resource type="Script" path="res://Scripts/PhysicsPlayground/shapeRope.gd" id="3_imm8m"]
+[ext_resource type="Script" path="res://Scripts/PhysicsPlayground/pinRope.gd" id="4_c0n3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0umk"]
 size = Vector2(128, 128)
@@ -8,10 +12,15 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fex8h"]
 size = Vector2(128, 128)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7j12m"]
+a = Vector2(0, -100)
+b = Vector2(0, 100)
+
 [node name="Physics Playground" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(114, 89)
+position = Vector2(1305, 89)
+script = ExtResource("1_qa45u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_v0umk")
@@ -19,16 +28,14 @@ shape = SubResource("RectangleShape2D_v0umk")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 texture = ExtResource("1_y026q")
 
-[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="StaticBody2D"]
-node_a = NodePath("..")
-node_b = NodePath("../../RigidBody2D")
-length = 200.0
-rest_length = 200.0
-stiffness = 64.0
-damping = 0.01
+[node name="Pivot" type="StaticBody2D" parent="StaticBody2D"]
+position = Vector2(59, 59)
+rotation = -1.15192
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(197, 267)
+position = Vector2(1373, 348)
+can_sleep = false
+angular_damp_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 scale = Vector2(0.2, 0.2)
@@ -36,3 +43,53 @@ shape = SubResource("RectangleShape2D_fex8h")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D"]
 texture = ExtResource("1_y026q")
+
+[node name="Box 2" type="StaticBody2D" parent="."]
+position = Vector2(1194, 430)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box 2"]
+shape = SubResource("RectangleShape2D_v0umk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Box 2"]
+texture = ExtResource("1_y026q")
+
+[node name="Rock" type="RigidBody2D" parent="."]
+position = Vector2(1000, 325)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock"]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_fex8h")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock/CollisionShape2D"]
+texture = ExtResource("1_y026q")
+
+[node name="Bar" type="RigidBody2D" parent="."]
+position = Vector2(870, 351)
+rotation = -0.460485
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Bar"]
+position = Vector2(0, -100)
+node_a = NodePath("..")
+node_b = NodePath("../../Box 2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bar"]
+shape = SubResource("SegmentShape2D_7j12m")
+script = ExtResource("3_imm8m")
+
+[node name="Line2D" type="Line2D" parent="Bar"]
+points = PackedVector2Array(0, -100, 0, 100)
+width = 3.0
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="Bar"]
+position = Vector2(0, 100)
+node_a = NodePath("..")
+node_b = NodePath("../../Rock")
+script = ExtResource("4_c0n3j")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+position = Vector2(1325, 91)
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../RigidBody2D")
+length = 200.0
+stiffness = 64.0
+script = ExtResource("2_v80pq")
