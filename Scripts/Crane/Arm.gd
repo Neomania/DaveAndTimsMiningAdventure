@@ -34,9 +34,8 @@ func initialize_hook():
 	joint.set_node_b("../../Hook")
 	
 func _draw():
-	draw_set_transform(Vector2(0.0, 0.0))
 	var hookAnchor: Node2D = get_node("../Hook/CollisionPolygon2D/Hook Anchor")
 	var armAnchor: Node2D = get_node("./CollisionShape2D/Arm Anchor")
 	
-	draw_line(armAnchor.global_position - position, hookAnchor.global_position - position, Color.BLACK)
+	draw_line(armAnchor.global_position - global_position, hookAnchor.global_position - global_position, Color.BLACK)
 

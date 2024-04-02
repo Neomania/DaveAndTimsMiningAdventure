@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpwb41e2smmrb"]
+
+[ext_resource type="Script" path="res://Scripts/Mineable.gd" id="1_3m5pt"]
+[ext_resource type="Script" path="res://Scripts/Utils/PolygonVisualizer.gd" id="2_1a5ln"]
+
+[node name="Mineable" type="RigidBody2D"]
+can_sleep = false
+freeze = true
+freeze_mode = 1
+max_contacts_reported = 6
+contact_monitor = true
+script = ExtResource("1_3m5pt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(1, 0, 1, 1, 0, 1, -1, 0.585, 0, -1)
+
+[node name="Polygon2D" type="Polygon2D" parent="CollisionPolygon2D"]
+z_index = -1
+script = ExtResource("2_1a5ln")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

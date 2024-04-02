@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cls2jue6l4nyb"]
+[gd_scene load_steps=7 format=3 uid="uid://cls2jue6l4nyb"]
 
 [ext_resource type="Script" path="res://Scripts/ShovelTool.gd" id="2_i01cl"]
 [ext_resource type="PackedScene" uid="uid://bo6c1qu13y47l" path="res://Scenes/tiles.tscn" id="2_r45ec"]
-[ext_resource type="PackedScene" uid="uid://dkgadhsngwghx" path="res://Scenes/Prefabs/ShovelUse.tscn" id="3_to4qm"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/ShovelUse.tscn" id="3_to4qm"]
+[ext_resource type="PackedScene" uid="uid://cdngklain8ifu" path="res://Scenes/crane.tscn" id="4_vh50m"]
+[ext_resource type="PackedScene" uid="uid://cpwb41e2smmrb" path="res://Scenes/Prefabs/mineable.tscn" id="5_no31f"]
+[ext_resource type="Script" path="res://Scripts/MineableCreator.gd" id="7_kcgkd"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,3 +17,13 @@ position = Vector2(-864, -155)
 [node name="ShovelTool" type="Node2D" parent="."]
 script = ExtResource("2_i01cl")
 shovel_use = ExtResource("3_to4qm")
+
+[node name="Crane" parent="." instance=ExtResource("4_vh50m")]
+position = Vector2(-964, -543)
+
+[node name="MineableCreator" type="Node2D" parent="."]
+position = Vector2(-866, -153)
+script = ExtResource("7_kcgkd")
+mineableTemplate = ExtResource("5_no31f")
+genWidth = 1800.0
+genHeight = 600.0
