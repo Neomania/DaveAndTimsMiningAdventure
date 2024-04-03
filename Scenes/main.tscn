@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cls2jue6l4nyb"]
+[gd_scene load_steps=9 format=3 uid="uid://cls2jue6l4nyb"]
 
+[ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="1_8jidv"]
 [ext_resource type="Script" path="res://Scripts/ShovelTool.gd" id="2_i01cl"]
 [ext_resource type="PackedScene" uid="uid://dkgadhsngwghx" path="res://Scenes/Prefabs/ShovelUse.tscn" id="3_to4qm"]
 [ext_resource type="PackedScene" uid="uid://cdngklain8ifu" path="res://Scenes/crane.tscn" id="4_vh50m"]
@@ -11,6 +12,9 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+script = ExtResource("1_8jidv")
+cam_speed = 960.0
 
 [node name="ShovelTool" type="Node2D" parent="."]
 script = ExtResource("2_i01cl")
@@ -27,6 +31,7 @@ genWidth = 1800.0
 genHeight = 600.0
 
 [node name="Tiles" type="Node2D" parent="."]
-position = Vector2(-863, -155)
 script = ExtResource("6_0dkkr")
 tile_prefab = ExtResource("7_kelcn")
+max_width_viewport = 2
+max_height_viewport = 2
