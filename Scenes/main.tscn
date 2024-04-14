@@ -33,5 +33,9 @@ genHeight = 600.0
 [node name="Tiles" type="Node2D" parent="."]
 script = ExtResource("6_0dkkr")
 tile_prefab = ExtResource("7_kelcn")
-max_width_viewport = 2
-max_height_viewport = 2
+
+[node name="DebugOverlay" type="CanvasLayer" parent="."]
+
+[node name="DebugFps" type="Label" parent="DebugOverlay"]
+offset_right = 40.0
+offset_bottom = 23.0

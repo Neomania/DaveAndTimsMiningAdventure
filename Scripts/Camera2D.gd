@@ -1,6 +1,7 @@
 extends Camera2D
 @export var cam_speed : float = 1000.0
 @export var cam_zoom_speed : float = 2
+@onready var fps_label : Label = $"../DebugOverlay/DebugFps"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -35,4 +36,8 @@ func _process(delta):
 	# add some clamps
 	zoom.x = max(0.5, min(zoom.x, 2.0) )
 	zoom.y = zoom.x
+	
+	# add fps for debug
+	var fps = Engine.get_frames_per_second()
+	fps_label.text = "Fps: " + str(fps)
 
