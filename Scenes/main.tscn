@@ -1,13 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://cls2jue6l4nyb"]
+[gd_scene load_steps=14 format=3 uid="uid://cls2jue6l4nyb"]
 
 [ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="1_8jidv"]
 [ext_resource type="Script" path="res://Scripts/ShovelTool.gd" id="2_i01cl"]
+[ext_resource type="Script" path="res://Scenes/ResourceLabel.gd" id="2_kjruq"]
 [ext_resource type="PackedScene" uid="uid://dkgadhsngwghx" path="res://Scenes/Prefabs/ShovelUse.tscn" id="3_to4qm"]
 [ext_resource type="PackedScene" uid="uid://cdngklain8ifu" path="res://Scenes/crane.tscn" id="4_vh50m"]
 [ext_resource type="PackedScene" uid="uid://cpwb41e2smmrb" path="res://Scenes/Prefabs/mineable.tscn" id="5_no31f"]
 [ext_resource type="Script" path="res://Scripts/Tiles.gd" id="6_0dkkr"]
 [ext_resource type="Script" path="res://Scripts/MineableCreator.gd" id="7_kcgkd"]
 [ext_resource type="PackedScene" uid="uid://bwpcewr2ql71w" path="res://Scenes/Prefabs/Tile1.tscn" id="7_kelcn"]
+[ext_resource type="Script" path="res://Scenes/Resources.gd" id="9_4hlq2"]
+[ext_resource type="Script" path="res://Scripts/DeleteMineableOnExit.gd" id="11_dxvaj"]
+[ext_resource type="AudioStream" uid="uid://b67saif7l0rrv" path="res://Assets/Sounds/bonk_BEtiM8g.mp3" id="12_aeijq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6hgt"]
+size = Vector2(1951, 735)
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,6 +22,15 @@
 position_smoothing_enabled = true
 script = ExtResource("1_8jidv")
 cam_speed = 960.0
+
+[node name="Label" type="Label" parent="Camera2D"]
+offset_left = -936.0
+offset_top = -512.0
+offset_right = -750.0
+offset_bottom = -489.0
+text = "Resources: 999999"
+script = ExtResource("2_kjruq")
+metadata/_edit_use_anchors_ = true
 
 [node name="ShovelTool" type="Node2D" parent="."]
 script = ExtResource("2_i01cl")
@@ -24,18 +40,40 @@ shovel_use = ExtResource("3_to4qm")
 position = Vector2(-964, -543)
 
 [node name="MineableCreator" type="Node2D" parent="."]
-position = Vector2(-866, -153)
+position = Vector2(-879, 3)
 script = ExtResource("7_kcgkd")
 mineableTemplate = ExtResource("5_no31f")
 genWidth = 1800.0
 genHeight = 600.0
+genMaxRadius = 256.0
+genMinRadius = 32.0
 
 [node name="Tiles" type="Node2D" parent="."]
 script = ExtResource("6_0dkkr")
 tile_prefab = ExtResource("7_kelcn")
+max_width_viewport = 2
+max_height_viewport = 2
 
 [node name="DebugOverlay" type="CanvasLayer" parent="."]
 
 [node name="DebugFps" type="Label" parent="DebugOverlay"]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Resources" type="Node2D" parent="."]
+script = ExtResource("9_4hlq2")
+
+[node name="TreasureZone" type="Area2D" parent="."]
+position = Vector2(-960, 0)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("11_dxvaj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreasureZone"]
+position = Vector2(972.5, 368.5)
+shape = SubResource("RectangleShape2D_k6hgt")
+
+[node name="BonkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_aeijq")
+
+[connection signal="body_exited" from="TreasureZone" to="TreasureZone" method="_on_body_exited"]

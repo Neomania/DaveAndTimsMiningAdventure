@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/Mineable.gd" id="1_3m5pt"]
 [ext_resource type="Script" path="res://Scripts/Utils/PolygonVisualizer.gd" id="2_1a5ln"]
 
-[node name="Mineable" type="RigidBody2D"]
+[node name="Mineable" type="RigidBody2D" groups=["Mineable"]]
+collision_layer = 3
+collision_mask = 3
 can_sleep = false
 freeze = true
 freeze_mode = 1
@@ -18,4 +20,13 @@ polygon = PackedVector2Array(1, 0, 1, 1, 0, 1, -1, 0.585, 0, -1)
 z_index = -1
 script = ExtResource("2_1a5ln")
 
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

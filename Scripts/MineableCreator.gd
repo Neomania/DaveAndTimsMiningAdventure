@@ -6,7 +6,7 @@ extends Node2D
 @export var genMaxRadius: float = 128
 @export var genMinRadius: float = 64
 @export var genCount: int = 5
-
+@export var valueScaleFactor: float = 0.1
 
 class MineablePoint:
 	var radius: float
@@ -27,10 +27,12 @@ func _ready():
 func generateMineable(point: MineablePoint):
 	var newMineable: RigidBody2D = mineableTemplate.instantiate()
 	var points: PackedVector2Array = generatePolygon(randi_range(4, 8), point.radius)
+	var value = point.radius ** 2
 	print(point.position)
 	newMineable.get_node("CollisionPolygon2D").set_polygon(points)
 	newMineable.set_global_position(point.position)
 	print(newMineable.global_position)
+	newMineable.resourceValue = value * valueScaleFactor
 	
 	add_child(newMineable)
 	
