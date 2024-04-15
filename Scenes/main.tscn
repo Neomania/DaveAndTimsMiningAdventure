@@ -51,8 +51,8 @@ genMinRadius = 32.0
 [node name="Tiles" type="Node2D" parent="."]
 script = ExtResource("6_0dkkr")
 tile_prefab = ExtResource("7_kelcn")
-max_width_viewport = 2
-max_height_viewport = 2
+max_width_viewport = 1
+max_height_viewport = 1
 
 [node name="DebugOverlay" type="CanvasLayer" parent="."]
 

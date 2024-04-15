@@ -7,6 +7,12 @@ var shovel_activated : bool = true
 func _ready():
 	pass # Replace with function body.
 
+func call_area_entered(area, toolUse):
+	var distance = toolUse.global_position - area.global_position
+	var maxDistance = toolUse.get_node("CollisionShape2D").shape.radius
+	var a = (distance.length() / maxDistance)
+	if a < 1.0:
+		area.get_node("Sprite2D").modulate.a -= 1.0 - a
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -14,7 +20,7 @@ func _process(_delta):
 		# spend resource
 		if $/root/Node2D/Resources.resourceAmount > 5:
 			$/root/Node2D/Resources.resourceAmount -= 5
-			if  $"../Tiles".current_hover_tile != null: #hovering over a tile
-				var shovel = shovel_use.instantiate()
-				shovel.position = get_global_mouse_position()
-				add_child(shovel)
+			var shovelUse = shovel_use.instantiate()
+			shovelUse.position = get_global_mouse_position()
+			shovelUse.connect("area_entered_tool_use", call_area_entered)
+			add_child(shovelUse)
