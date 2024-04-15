@@ -11,7 +11,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_just_pressed("left_click") && shovel_activated:
-		if  $"../Tiles".current_hover_tile != null: #hovering over a tile
-			var shovel = shovel_use.instantiate()
-			shovel.position = get_global_mouse_position()
-			add_child(shovel)
+		# spend resource
+		if $/root/Node2D/Resources.resourceAmount > 5:
+			$/root/Node2D/Resources.resourceAmount -= 5
+			if  $"../Tiles".current_hover_tile != null: #hovering over a tile
+				var shovel = shovel_use.instantiate()
+				shovel.position = get_global_mouse_position()
+				add_child(shovel)
