@@ -36,6 +36,11 @@ left_click={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Tiles"
+2d_physics/layer_2="Mineables"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
